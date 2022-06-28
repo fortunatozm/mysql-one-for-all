@@ -41,20 +41,20 @@ create table SpotifyClone.users (
     ) engine = InnoDB;
 
 create table SpotifyClone.historico (
-	id int auto_increment primary key,
     usuario_id int not null,
     foreign key (usuario_id) references users(id),
     musica_id int not null,
     foreign key (musica_id) references musicas(id),
+    constraint primary key(musica_id, usuario_id),
     data_reproducao datetime not null
     ) engine = InnoDB;
 
 create table SpotifyClone.users_artistas (
-    id int auto_increment primary key,
     usuario_id int not null,
     foreign key (usuario_id) references users(id),
     artista_id int not null,
-	foreign key (artista_id) references artista(id)
+	foreign key (artista_id) references artista(id),
+    constraint primary key(usuario_id, artista_id)
     ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.artista (nome)
@@ -183,7 +183,7 @@ VALUES
   (10, 12, '2017-07-27 05:24:49'),
   (10, 13, '2017-12-25 01:03:57');
 
-INSERT INTO SpotifyClone.users_albuns (usuario_id, artista_id)
+INSERT INTO SpotifyClone.users_artistas (usuario_id, artista_id)
 VALUES
   (1, 1),
   (1, 4),
